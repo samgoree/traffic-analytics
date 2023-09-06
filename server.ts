@@ -1,7 +1,7 @@
 require("dotenv").config()
-const GOOGLE_KEY = process.env.GOOGLE_API_KEY
+const GOOGLE_KEY = process.env.GOOGLE_API_KEY;
 
-const db_file = "/Users/sgoree/traffic-analytics/dev.db";
+const DB_FILE = process.env.DB_FILE_LOCATION;
 
 import express from 'express';
 
@@ -10,7 +10,7 @@ const sqlite3 = require('sqlite3');
 
 import {Client} from "@googlemaps/google-maps-services-js";
 
-const db = new sqlite3.Database(db_file);
+const db = new sqlite3.Database(DB_FILE);
 
 const app = express();
 const port = 3000;

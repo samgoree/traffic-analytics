@@ -5,12 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
 var GOOGLE_KEY = process.env.GOOGLE_API_KEY;
-var db_file = "/Users/sgoree/traffic-analytics/dev.db";
+var DB_FILE = process.env.DB_FILE_LOCATION;
 var express_1 = __importDefault(require("express"));
 var cron = require('node-cron');
 var sqlite3 = require('sqlite3');
 var google_maps_services_js_1 = require("@googlemaps/google-maps-services-js");
-var db = new sqlite3.Database(db_file);
+var db = new sqlite3.Database(DB_FILE);
 var app = (0, express_1.default)();
 var port = 3000;
 function initMap() {
