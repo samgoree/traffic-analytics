@@ -19,7 +19,7 @@ function initMap() {
     cron.schedule('0/10 8-20 * * 1-5', function () {
         recordDirections(client);
     });
-    recordDirections(client);
+    //recordDirections(client);
 }
 function recordDirections(client) {
     console.log("requesting directions");

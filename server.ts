@@ -23,7 +23,7 @@ function initMap(): void {
   		recordDirections(client);
 	});
 	
-	recordDirections(client);
+	//recordDirections(client);
 }
 
 function recordDirections(client : Client){
