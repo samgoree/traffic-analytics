@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+	<script type="module">
+		const width = 640;
+		const height = 400;
+		const marginTop = 20;
+		const marginRight = 20;
+		const marginBottom = 30;
+		const marginLeft = 40;
+
+		const data = await d3.json("/data");
+		console.log(data);
+		// Wed Sep 06 2023 15:03:28
+		var parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
+
+		var dates = data.map( (d) => parseDate(d.created_at));
+
+		const x = d3.scaleUtc()
+			.domain([dates[0], dates[dates.length - 1]])
+			.range([marginLeft, width - marginRight]);
+
+		// Declare the y (vertical position) scale.
+		const y = d3.scaleLinear()
+		    .domain([0, 10000])
+		    .range([height - marginBottom, marginTop]);
+
+		// Create the SVG container.
+		const svg = d3.create("svg")
+		    .attr("width", width)
+		    .attr("height", height);
+
+		// Add the x-axis.
+		svg.append("g")
+		    .attr("transform", `translate(0,${height - marginBottom})`)
+		    .call(d3.axisBottom(x));
+
+		// Add the y-axis.
+		svg.append("g")
+		    .attr("transform", `translate(${marginLeft},0)`)
+		    .call(d3.axisLeft(y));
+		
+		svg.append("path")
+		   .datum(data)
+		   .attr("fill", "none")
+		   .attr("stroke", "black")
+		   .attr("stroke-width", 1.5)
+		   .attr("d", d3.line()
+		   	            .x(function(d) { return x(parseDate(d.created_at))})
+		   	            .y(function(d) { return y(d.duration_in_traffic)})
+		   	    );
+
+		// Append the SVG element.
+		document.getElementById("container").append(svg.node());
+	</script>
+</head>
+<body>
+	<div id="container"></div>
+</body>
+</html>

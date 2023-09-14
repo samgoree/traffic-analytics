@@ -60,6 +60,18 @@ initMap();
 app.get('/', function (req, res) {
     res.sendFile('/Users/sgoree/traffic-analytics/index.html');
 });
+app.get('/data', function (req, res) {
+    db.all("SELECT created_at,duration_in_traffic,distance FROM time_to_newmarket", function (err, rows) {
+        if (err != null) {
+            console.log(err);
+            res.status(400).send({ message: err.toString() });
+        }
+        else {
+            console.log(rows.length.toString() + " rows sent");
+            res.json(rows);
+        }
+    });
+});
 app.listen(port, function () {
     console.log('Server Listening on port', port);
 });
