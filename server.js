@@ -58,7 +58,7 @@ function recordDirections(client) {
 }
 initMap();
 app.get('/', function (req, res) {
-    res.sendFile('/Users/sgoree/traffic-analytics/index.html');
+    res.sendFile('/home/samgoree/traffic-analytics/index.html');
 });
 app.get('/data', function (req, res) {
     db.all("SELECT created_at,duration_in_traffic,distance FROM time_to_newmarket", function (err, rows) {

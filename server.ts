@@ -72,7 +72,7 @@ function recordDirections(client : Client){
 initMap();
 
 app.get('/', (req, res) => {
-	res.sendFile('/Users/sgoree/traffic-analytics/index.html')
+	res.sendFile('/home/samgoree/traffic-analytics/index.html')
 });
 
 app.get('/data', (req, res) => {
